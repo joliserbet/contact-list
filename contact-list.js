@@ -1,33 +1,50 @@
 //Definimos la lista con los contactos existentes.
-listaDeContactos = ["Mario Betancourth", "Jorge Trejo", "Linneth Cruz"];
+let listaDeContactos = [];
 
-
-//Creamos funcion para agregar un nuevo contacto a la lista
-function aggContacto(nuevoContacto) {
-  listaDeContactos.push(nuevoContacto);
+//funcion para crear un nuevo contacto
+function crearContacto(id, nombres, apellidos, telefono, ciudad, direccion) {
+  const contacto = {
+    id: id,
+    nombres: nombres,
+    apellidos: apellidos,
+    telefono: telefono,
+    location: {
+      ciudad: ciudad,
+      direccion: direccion,
+    },
+  };
+  listaDeContactos.push(contacto);
+  console.log(`Se creo el contacto ${nombres} ${apellidos} con ID ${id}`);
 }
 
-//Creamos funcion para eliminar un contacto de la lista
-function eliminarContacto(contacto) {
-  const indice = listaDeContactos.findIndex((c) => c === contacto);
+//funcion para eliminar el contacto con id
+function eliminarContacto(id) {
+  const indice = listaDeContactos.findIndex((contacto) => contacto.id === id);
   if (indice !== -1) {
-    listaDeContactos.splice(indice, 1);
-    console.log(`Se eliminó el contacto "${contacto}" de la lista.`);
+    const contactoEliminado = listaDeContactos.splice(indice, 1)[0];
+    console.log(
+      `El contacto ${contactoEliminado.nombres} ${contactoEliminado.apellidos} con ID: ${contactoEliminado.id} se ha eliminado exitosamente.`
+    );
   } else {
-    console.log(`El contacto "${contacto}" no existe en la lista.`);
+    console.log(`El contacto no se encuentra en la lista.`);
   }
 }
 
-//Creamos funcion para mostrar todos los contactos de la lista
-function mostrarContactos(){
-    console.log(listaDeContactos);  
-}
+crearContacto(
+    1,
+  "Mario Joliser",
+  "Betancourth Trejo",
+  87913451,
+  "Tegucigalpa",
+  "Altos del Trapiche"
+);
+crearContacto(
+    2,
+  "Mario Joliser",
+  "Betancourth Trejo",
+  87913451,
+  "Tegucigalpa",
+  "Altos del Trapiche"
+);
 
-//llamando a la funcion para agregar contacto
-aggContacto("Nicolle Sandoval");
-
-//llamando a la funcion para eliminar un contacto
-eliminarContacto("Mario Betancourth");
-
-//llamando a la funcion para mostra los contactos
-mostrarContactos();
+console.log(listaDeContactos);
